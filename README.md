@@ -1,5 +1,7 @@
 # UnshortyBot
 
+![UnshortyBot Icon](icon.png)
+
 URL Unshortener Bot is a Telegram bot that unshortens shortened URLs and removes tracking data.
 
 ## Features
