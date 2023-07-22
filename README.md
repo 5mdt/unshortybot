@@ -2,7 +2,7 @@
 
 ![UnshortyBot Icon](icon.png)
 
-URL Unshortener Bot is a Telegram bot that unshortens shortened URLs and removes tracking data.
+UnshortyBot is a Telegram bot that unshortens shortened URLs and removes tracking data.
 
 ## Features
 
@@ -13,7 +13,7 @@ URL Unshortener Bot is a Telegram bot that unshortens shortened URLs and removes
 
 ## How to Use
 
-1. Start a chat with the URL Unshortener Bot on Telegram.
+1. Start a chat with the UnshortyBot Bot on Telegram.
 2. Send a message containing a shortened URL to the bot.
 3. The bot will reply with the unshortened URL and any tracking parameters removed.
 
@@ -47,7 +47,7 @@ Run the bot using `python main.py`.
 
     This will build the Docker image and start the container in detached mode.
 
-6. Verify that the bot is running by sending a message to the URL Unshortener Bot on Telegram.
+6. Verify that the bot is running by sending a message to the UnshortyBot Bot on Telegram.
 
 Also you can use prebuilt image:
 
@@ -65,7 +65,7 @@ Set your Telegram bot token in .env file or replace in in `docker-compose.yaml` 
 
 ## Links
 
-- [Telegram Bot](https://t.me/)
+- [Telegram Bot](https://t.me/unshortybot)
 - [Github Project](https://github.com/nett00n/UnshortyBot)
 - [DockerHub Page](https://hub.docker.com/r/nett00n/unshortybot)
 

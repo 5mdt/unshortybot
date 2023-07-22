@@ -1,0 +1,5 @@
+.*
+!.gitignore
+!.github
+config.yaml
+config.yml
