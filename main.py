@@ -13,30 +13,37 @@ def start_command(update: Update, context: CallbackContext) -> None:
 def handle_message(update: Update, context: CallbackContext) -> None:
     url = update.message.text
 
-    # Follow redirects and retrieve the final URL
-    final_url = requests.get(url).url
+    try:
+        # Follow redirects and retrieve the final URL
+        final_url = requests.get(url).url
 
-    # Remove tracking parameters if present
-    untracked_url = urllib.parse.urlparse(final_url)
-    untracked_url = urllib.parse.urlunparse(untracked_url._replace(query=''))
+        # Remove tracking parameters if present
+        untracked_url = urllib.parse.urlparse(final_url)
+        untracked_url = urllib.parse.urlunparse(untracked_url._replace(query=''))
 
-    update.message.reply_text(f"Unshortened URL: {untracked_url}")
+        # Disable link preview in the message
+        disable_preview = {'disable_web_page_preview': True}
+
+        update.message.reply_text(f"Redirected URL: {final_url}\nUnshortened URL: {untracked_url}", disable_web_page_preview=True)
+    except requests.exceptions.RequestException:
+        update.message.reply_text("An error occurred while retrieving the URL.")
 
 
 def get_bot_token() -> str:
+
+    # Check for bot token in environment variable
+    for key, value in os.environ.items():
+        if key.lower() == 'telegram_bot_token':
+            return value
+
     # Check for bot token in config.yaml or config.yml
     for config_file_name in ['config.yaml', 'config.yml']:
         if os.path.isfile(config_file_name):
             with open(config_file_name, 'r') as config_file:
                 config = yaml.safe_load(config_file)
-                bot_token = config.get('telegram_bot_token')
-                if bot_token:
-                    return bot_token
-
-    # Check for bot token in environment variable
-    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
-    if bot_token:
-        return bot_token
+                for key, value in config.items():
+                    if key.lower() == 'telegram_bot_token':
+                        return value
 
     raise ValueError("Bot token not found. Please provide it in the config.yaml, config.yml file, or set the TELEGRAM_BOT_TOKEN environment variable.")
 
